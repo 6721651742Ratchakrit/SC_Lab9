@@ -37,11 +37,18 @@ public class ProductAnalytics {
      * คำนวณมูลค่ารวมของสต็อกสินค้าในหมวดหมู่ที่กำหนด
      */
     public double calculateTotalStockValueForCategory(String category) {
+        /*
         double totalValue = productCatalog.stream()
         .filter(p -> p.category().equalsIgnoreCase(category))
         .mapToDouble(p ->  p.price() * p.stock())
         .sum();
         return totalValue;
+        */
+        return productCatalog.stream()
+        .filter(p -> p.category().equalsIgnoreCase(category))
+        .map(p ->  p.price() * p.stock())
+        .reduce(0.0, (sum,value) -> sum+value);
+        
     }
 
     /**
